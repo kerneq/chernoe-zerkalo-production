@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="На нашем сайте вы можете смотреть сериала Черное зеркало в перевод Кубик в кубе
+    , в оригинале (можно включить субтитра на английском и русском языках)">
+    <meta name="keywords" content="">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Смотреть сериал Черное зеркало</title>
+
+    <link rel="shortcut icon" href="{% static 'mirror/img/icon.ico' %}" type="image/x-icon">
+    <!-- Bootstrap -->
+    <link href="{% static 'mirror/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'mirror/css/style.css' %}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  <!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter42563724 = new Ya.Metrika({ id:42563724, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/42563724" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91413000-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    <header>
+        <nav class="navbar-inverse">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span>Сезоны</span>
+              </button>
+              <a id="headTitle" class="navbar-brand" href="{% url 'mirror:index' %}">Black Mirror</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse sesonsNumber" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                <li><span id="seasons" class="hidden-xs">СЕЗОНЫ</span></li>
+                  {% for key, value in dict.items %}
+                    <li><a class="hidden-xs" href="{% url 'mirror:season' key %}" style="margin-left:15px;">{{ key }}</a></li>
+                    <li><a class="hidden-md hidden-lg hidden-sm" href="{% url 'mirror:season' key %}" style="margin-left:15px;">{{ key }} сезон</a></li>
+                  {% endfor %}
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+    </header>
+
+      <div class="headImg container-fluid" style="background-image: url({% static 'mirror/img/home/test1.jpg' %});">
+          <div class="container">
+              <div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 140px;">
+                  <H1 class="text-center">
+                      <span id="img-title">смотреть сериал онлайн</span><br/>
+                      <span style="position:relative; top: 8px;" id="img-serial-name"><strong>black mirror</strong></span>
+                  </H1>
+              </div>
+
+              <div class="row" style="position: relative; top:10px;">
+                  <div class="text-center col-md-8 col-md-offset-2">
+                      {% if request.COOKIES.beginner == 'no' %}
+                        <span id="you-watched">Вы остановились на {{ request.COOKIES.series }} серии {{ request.COOKIES.season }} сезона</span>
+                      {% endif %}
+                  </div>
+              </div>
+
+              <div class="row" style="margin-top: 20px;">
+                  <div class="text-center col-md-8 col-md-offset-2">
+                      {% if request.COOKIES.beginner == 'no' %}
+                          {% if request.COOKIES.language == 'rus' %}
+                            <a class="btn btn-default btn-lg" href="{% url 'mirror:watch' request.COOKIES.season request.COOKIES.series %}" role="button">Продолжить просмотр</a>
+                          {% else %}
+                            <a class="btn btn-default btn-lg" href="{% url 'mirror:watchEngl' request.COOKIES.season request.COOKIES.series %}" role="button">Продолжить просмотр</a>
+                          {% endif %}
+                      {% else %}
+                            <a class="btn btn-default btn-lg" href="{% url 'mirror:watch' 1 1 %}" role="button">Начать просмотр</a>
+                      {% endif %}
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div> <!-- was content tag -->
+        <div class="container" style="margin-top: 40px;">
+            <div class="row" style="margin-bottom: 50px;">
+                <div class="col-md-3 col-md-offset-1 hidden-xs hidden-sm">
+                    <img alt="сериал Черное зеркало - описание, смотреть онлайн" src="{% static 'mirror/img/home/mirror.jpg' %}" width="230" style="float:right;" />
+                </div>
+                <div class="col-md-7 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+                    <!-- adverd -->
+                    <!--
+                    <div class="advert row">
+
+                    </div>
+                    -->
+                    <div class="row">
+                        <table class="tableContent table">
+                            <tr>
+                                <td><span style="color:#999;">Озвучка</span></td>
+                                <td>Кубик в Кубе</td>
+                            </tr>
+                            <tr>
+                                <td><span style="color:#999;">Сезоны</span></td>
+                                <td>1 сезон, 2 сезон, 3 сезон</td>
+                            </tr>
+                            <tr>
+                                <td><span style="color:#999;">Год выпуска</span></td>
+                                <td>2011</td>
+                            </tr>
+                            <tr>
+                                <td><span style="color:#999;">Жанр</span></td>
+                                <td>Сатира</td>
+                            </tr>
+                            <tr>
+                                <td><span style="color:#999;">Режиссёр</span></td>
+                                <td>Чарли Брукер</td>
+                            </tr>
+                            <tr>
+                                <td><span style="color:#999;">Актерский состав</span></td>
+                                <td>Хейли Этвелл, Рэйф Сполл, Джон Хэмм, Ханна Джон Камен, Брайони Нейлен Франсис, Тоби Кеббелл, Дэниэл Калуя, Рори Киннир, Ленора Кричлоу, Дэниел Ригби</td>
+                            </tr>
+                        </table>
+
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <table id="kinopoisk">
+                                    <tr>
+                                        <td>
+					    <a rel="nofollow" target="__blank" href="https://www.kinopoisk.ru/film/655800/">
+                                            	<img alt="Оценка кинопоиска сериала Черное Зеркало" src="{% static 'mirror/img/home/kino.png' %}" style="width: 140px;" />
+                                            </a>
+					</td>
+                                        <td>
+					 <a rel="nofollow" target="__blank" href="">
+                                            <span id="rating">
+                                                <strong>8.452</strong>
+                                            </span>
+					</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <table id="imdb">
+                                    <tr>
+                                        <td>
+                                            <img alt="рейтинг сериала Черное Зеркало от IMDb" src="{% static 'mirror/img/home/im.png' %}" style="width: 60px;" />
+                                        </td>
+                                        <td>
+                                            <span id="ratingIm">                          <strong>8.9</strong>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- text description -->
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1" style="padding-left: 40px;
+                                                              padding-right: 35px;
+                                                              padding-bottom: 30px;">
+Наш проект создан для вас, чтобы вы могли <strong>смотреть любимый сериал Черное Зеркало</strong> без изобилия рекламы, в хорошем HD качестве. Мы делаем все, чтобы вам было комфортно, подготовили русскую и оригинальную озвучку, подготовили качественные субтитры, и чистые звуковые дорожки. Комфортный просмотр обеспечен!	   
+<hr />
+		   <p>
+Черное зеркало - сатирический и фантастический сериал. Его главная особенность в том, что ни серии, ни актеры, ни места событий не связаны между собой. Новая серия словно новый фильм, который раскрывает одну из острых социальных проблем современности. Лишь некоторые из многочисленных: влияние информационных технологий на взаимоотношения людей, значимость конфиденциальной информации человека и проблемы экологического характера.
+</p>
+		   <p>
+В современном мире на каждом углу можно увидеть экраны телевизоров, мониторы компьютеров, сотовые телефоны и планшеты - это черное зеркало нашего существования. Сериал показывает к чему может привести такая близкая связь с технологиями.  
+		    </p>
+                </div>
+            </div>
+        </div>
+      </div> <!-- was content tag -->
+
+      <div style="height: 100%; display: table; width: 100%;">
+      <div id="watch-series" class="container-fluid" style="display: table-row; height: 100%;">
+          <div class="container" style="margin-bottom: 45px;">
+              <div class="row">
+                  <div class="col-md-10 col-md-offset-1" style="padding-left: 40px;
+                                                                padding-right: 35px;">
+                      {% for key, value in dict.items %}
+                            <H3 style="margin-bottom: 20px;">{{ key }} сезон</H3>
+                            <div class="clear: both;"></div>
+                            <div style="position:relative; right: 15px; bottom: 20px;">
+                                {% for s in value%}
+                                    <a href="{% url 'mirror:watch' key s.number %}">
+                                        <div style="background-image: url({% static ''%}/mirror/img/holder/{{s.season}}{{s.number}}.jpg);" class="icon-serie">
+                                            <div class="serie-name">
+                                                <span class="seriesTXT">{{ s.number }} серия</span>
+                                            </div>
+                                            <div class="serie-desc">
+                                                <span class="seriesTXT">{{ s.name }}</span>
+                                            </div>
+                                            <div class="serie-time">
+                                                <span class="seriesTXT">{{ s.duration }}</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div style="clear: both;"></div>
+                      {% endfor %}
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <footer>
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-2 col-md-offset-1 col-xs-12 col-sm-6">
+                    <a class="btn btn-success btn-sm" href="{% url 'mirror:subscribe' %}" role="button" style="position:relative; bottom: 9px; left: 25px;">Хочу узнавать о новых сериях</a>
+                  </div>
+                  <div class="col-md-3 col-md-offset-1 col-xs-12 col-sm-6">
+                    <a class="btn btn-success btn-sm" href="{% url 'mirror:callback' %}" role="button" 
+			style="position:relative; bottom: 9px; left: 25px;">Правообладателям</a>
+                  </div>
+                  <div class="col-md-5 col-md-offset-0 hidden-xs hidden-sm-6">
+                    <span style="position:relative; bottom: 2px; left: 37px; color: #9f9b9b">материал предоставлен только для ознакомления</span>
+                  </div>
+              </div>
+          </div>
+      </footer>
+      </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'mirror/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>
